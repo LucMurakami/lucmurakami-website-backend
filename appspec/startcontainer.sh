@@ -5,4 +5,4 @@ docker pull 164064335984.dkr.ecr.us-west-2.amazonaws.com/lucmurakami/lucmurakami
     sleep 600
     exit 1
 }
-docker run --name lucmurakami-website-backend -p 80:8080 --detach 164064335984.dkr.ecr.us-west-2.amazonaws.com/lucmurakami/lucmurakami-website-backend:latest
+docker run --name pywebapp -p 80:8080 --detach 164064335984.dkr.ecr.us-west-2.amazonaws.com/lucmurakami/lucmurakami-website-backend:latest
