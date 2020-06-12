@@ -1,0 +1,9 @@
+version: 0.0
+os: linux
+hooks:
+  ApplicationStop:
+    - location: appspec/stopcontainer.sh
+      timeout: 60
+  ApplicationStart:
+    - location: appspec/startcontainer.sh
+      timeout: 600
