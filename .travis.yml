@@ -1,26 +1,23 @@
-env:
-  - DB=postgres
-  - SH=bash
-  - PACKAGE_VERSION="1.0.*"
+
+sudo: 'required'
 
 language: node_js
 node_js:
   - 12
 
+before_install:
+  - pyenv global 3.7.1
+  - pip install -U pip
+  - pip install awscli
+  - PATH=$HOME/.local/bin:$PATH
+
 script:
   - yarn test
-  
-after_success:
   - chmod +x .travis/build.sh
   - "./.travis/build.sh"
+  
+after_success:
+  - bash .travis/ecs-deploy.sh -c $ECS_CLUSTER -n $ECS_SERVICE -i $ECR_REPO_NAME
 
-deploy:
-  provider: codedeploy
-  revision_type: github
-  access_key_id: $AWS_ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
-  application: "lucmurakami-website-backend"
-  deployment_group: "lucmurakami-website-backend-deploygroup"
-  region: "us-west-2"
-  on:
-    branch: production
+notifications:
+  email: false
