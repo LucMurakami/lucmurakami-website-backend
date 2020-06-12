@@ -13,4 +13,4 @@ RUN cd /var/www/api && yarn install
 WORKDIR /var/www/api
 
 EXPOSE 8080
-CMD ["yarn", "start"]
+CMD ["yarn", "test"]
