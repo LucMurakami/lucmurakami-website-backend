@@ -11,10 +11,6 @@ app.get('/test', (req, res) => {
   res.send({text:"Testing with travis"});
 });
 
-app.get('/help', (req, res) => {
-  res.send({text:"Help endpoint"});
-});
-
 const port = process.env.PORT || 5000;
 app.listen(port);
 
