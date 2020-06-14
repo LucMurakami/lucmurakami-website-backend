@@ -7,15 +7,12 @@ node_js:
 services:
   - docker
 
-before_install:
-  - pyenv global 3.7.1
+# install:
+#   - pip install -U pip
+#   - pip install awscli
 
-install:
-  - pip install -U pip
-  - pip install awscli
-
-after_install:
-  - PATH=$HOME/.local/bin:$PATH
+# after_install:
+#   - PATH=$HOME/.local/bin:$PATH
 
 before_script:
   - yarn test
@@ -24,8 +21,8 @@ script:
   - chmod +x .travis/build.sh
   - "./.travis/build.sh"
   
-after_success:
-  - bash .travis/ecs-deploy.sh -c $ECS_CLUSTER -n $ECS_SERVICE -i $ECR_REPO_NAME
+# after_success:
+#   - bash .travis/ecs-deploy.sh -c $ECS_CLUSTER -n $ECS_SERVICE -i $ECR_REPO_NAME
 
 notifications:
   email: false
