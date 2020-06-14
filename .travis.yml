@@ -4,18 +4,22 @@ language: node_js
 node_js:
   - 12
 
-services:
-  - docker
-
-before_script:
-  - yarn test
+before_install:
+  - pyenv global 3.7.1
+  - pip install -U pip
+  - pip install awscli
+  - PATH=$HOME/.local/bin:$PATH
 
 script:
+  - yarn test
   - chmod +x .travis/build.sh
   - "./.travis/build.sh"
   
-# after_success:
-#   - bash .travis/ecs-deploy.sh -c $ECS_CLUSTER -n $ECS_SERVICE -i ECR_BASE_URI/$ECR_REPO_NAME:latest
+after_success:
+  - echo OUTSIDE PRODUCTION
+  if: branch = production
+    - echo PRODUCTION
+    - bash .travis/ecs-deploy.sh -c $ECS_CLUSTER -n $ECS_SERVICE -i $ECR_BASE_URI/$ECR_REPO_NAME:latest
 
 notifications:
   email: false
