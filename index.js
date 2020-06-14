@@ -3,19 +3,13 @@ const path = require('path');
 
 const app = express();
 
-// Serve static files from the React app
-// app.use(express.static(path.join(__dirname, 'client/build')));
-
-// Put all API endpoints under '/api'
-app.get('/api/test', (req, res) => {
-  res.send({text:"Testing with travis"});
+app.get('/', (req, res) => {
+  res.send({text:"This is the homepage!"});
 });
 
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname+'/../client/build/index.html'));
-// });
+app.get('/test', (req, res) => {
+  res.send({text:"Testing with travis"});
+});
 
 const port = process.env.PORT || 8080;
 app.listen(port);
