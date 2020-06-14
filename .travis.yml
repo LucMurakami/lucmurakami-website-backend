@@ -16,6 +16,8 @@ script:
   - "./.travis/build.sh"
   
 after_success:
+  - chmod +x .travis/update-service.sh
+  - chmod +x .travis/ecs-deploy.sh
   - bash .travis/update-service.sh
 
 notifications:
