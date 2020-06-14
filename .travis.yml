@@ -7,13 +7,6 @@ node_js:
 services:
   - docker
 
-# install:
-#   - pip install -U pip
-#   - pip install awscli
-
-# after_install:
-#   - PATH=$HOME/.local/bin:$PATH
-
 before_script:
   - yarn test
 
@@ -22,7 +15,7 @@ script:
   - "./.travis/build.sh"
   
 # after_success:
-#   - bash .travis/ecs-deploy.sh -c $ECS_CLUSTER -n $ECS_SERVICE -i $ECR_REPO_NAME
+#   - bash .travis/ecs-deploy.sh -c $ECS_CLUSTER -n $ECS_SERVICE -i ECR_BASE_URI/$ECR_REPO_NAME:latest
 
 notifications:
   email: false
