@@ -16,9 +16,7 @@ script:
   - "./.travis/build.sh"
   
 after_success:
-  - echo OUTSIDE PRODUCTION
   if: branch = production
-    - echo PRODUCTION
     - bash .travis/ecs-deploy.sh -c $ECS_CLUSTER -n $ECS_SERVICE -i $ECR_BASE_URI/$ECR_REPO_NAME:latest
 
 notifications:
