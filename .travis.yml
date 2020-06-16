@@ -1,15 +1,8 @@
-
 sudo: 'required'
 
 language: node_js
 node_js:
   - 12
-
-before_install:
-  - pyenv global 3.7.1
-  - pip install -U pip
-  - pip install awscli
-  - PATH=$HOME/.local/bin:$PATH
 
 script:
   - yarn test
@@ -17,7 +10,9 @@ script:
   - "./.travis/build.sh"
   
 after_success:
-  - bash .travis/ecs-deploy.sh -c $ECS_CLUSTER -n $ECS_SERVICE -i $ECR_REPO_NAME
+  - chmod +x .travis/update-service.sh
+  - chmod +x .travis/ecs-deploy.sh
+  - bash .travis/update-service.sh
 
 notifications:
   email: false

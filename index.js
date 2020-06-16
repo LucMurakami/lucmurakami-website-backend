@@ -1,23 +1,25 @@
 const express = require('express');
-const path = require('path');
+const cors = require('cors');
 
 const app = express();
+const options = {
+  origin: true,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  exposedHeaders: ["x-auth-token"]
+};
 
-// Serve static files from the React app
-// app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(cors(options));
 
-// Put all API endpoints under '/api'
-app.get('/api/test', (req, res) => {
+app.get('/', (req, res) => {
+  res.send({text:"This is the homepage!"});
+});
+
+app.get('/test', (req, res) => {
   res.send({text:"Testing with travis"});
 });
 
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname+'/../client/build/index.html'));
-// });
-
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 5000;
 app.listen(port);
 
 console.log(`Website backend listening on ${port}`);
