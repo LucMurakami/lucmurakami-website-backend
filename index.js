@@ -1,7 +1,7 @@
 const express = require('express');
-const cors = require('cors');
-
 const app = express();
+
+const cors = require('cors');
 const options = {
   origin: true,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
@@ -11,13 +11,8 @@ const options = {
 
 app.use(cors(options));
 
-app.get('/', (req, res) => {
-  res.send({text:"This is the homepage!"});
-});
-
-app.get('/test', (req, res) => {
-  res.send({text:"Testing with travis"});
-});
+const serviceRoutes = require('./routes/serviceRoute');
+app.use(serviceRoutes);
 
 const port = process.env.PORT || 5000;
 app.listen(port);
