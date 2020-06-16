@@ -8,7 +8,12 @@ exports.getMotivation = (req, res, next) => {
   fetch("https://api.reddit.com/r/GetMotivated/top.json?t=day&raw_json=1")
   .then(response => response.json())
   .then(data => {
-    res.send(data.data.children[0].data.preview.images[0].source.url)
+    const json = {
+      title: data.data.children[0].data.title,
+      image: data.data.children[0].data.preview.images[0].source.url,
+      upvotes: data.data.children[0].data.ups,
+    }
+    res.send(json)
   })
   .catch(() => {
     res.status(500).send("Error");
